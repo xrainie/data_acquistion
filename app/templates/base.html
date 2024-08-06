@@ -11,12 +11,12 @@
         <a href="/" class="logo">AdminPanel</a>
         <ul class="menu">
         {% if request.user.is_authenticated %}
-        <form action="{% url "logout" %}" method='post'>
+        <form action="#" method='post'>
             {% csrf_token %}
             <input type="submit" value='Выйти'>
         </form>
         {% else %}
-            <li><a href="{% url "login" %}">Войти</a></li>
+            <li><a href="{% url "app:login" %}">Войти</a></li>
         {% endif %}
         </ul>
     </div>

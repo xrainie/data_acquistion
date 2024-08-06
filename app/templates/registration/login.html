@@ -2,19 +2,19 @@
 {% block title %}Вход{% endblock %}
 {% block content %}
 <h1>Вход</h1>
-<div class="module">
-{% if form.errors %}
-<p>Вы ввели неверный логин или пароль. Пожалуйста, попробуйте снова.</p>
-{% else %}
-<p>Введите данные для входа:</p>
-{% endif %}
-<div class="login-form">
-<form action="{% url 'login' %}" method="post">
-{{ form.as_p }}
-{% csrf_token %}
-<input type="hidden" name="next" value="{{ next }}" />
-<p><input type="submit" value="Log-in"></p>
-</form>
-</div>
+    <div class="module">
+    {% if form.errors %}
+        <p>Вы ввели неверный логин или пароль. Пожалуйста, попробуйте снова.</p>
+    {% else %}
+        <p>Введите данные для входа:</p>
+    {% endif %}
+    <div class="login-form">
+        <form action="{% url 'app:login' %}" method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}" />
+            <p><input type="submit" value="Log-in"></p>
+        </form>
+    </div>
 </div>
 {% endblock %}
