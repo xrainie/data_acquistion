@@ -1,10 +1,11 @@
 from django.shortcuts import redirect, render
 
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from .forms import CustomUserCreationForm, LoginForm
 
-"""Здесь не использую CBV и базовые представления авторизации django,
+"""Здесь не использую CBV и встроенные представления авторизации django,
              иначе было бы показывать нечего:D"""
 
 
@@ -26,7 +27,7 @@ def login_view(request):
         form = LoginForm()
     return render(request, "registration/login.html", context={"form": form})
 
-
+@login_required
 def logout_view(request):
     logout(request)
     return render(request, 'registration/logged_out.html')

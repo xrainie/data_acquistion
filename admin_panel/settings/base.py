@@ -1,5 +1,5 @@
 from pathlib import Path
-
+from django.urls import reverse_lazy
 from django.conf.global_settings import AUTH_USER_MODEL, LOGIN_URL, LOGOUT_REDIRECT_URL
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -8,13 +8,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
+    'app.apps.AppConfig',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app.apps.AppConfig',
 ]
 
 MIDDLEWARE = [
@@ -80,7 +81,5 @@ AUTH_USER_MODEL = 'app.CustomUser'
 
 STATIC_URL = 'static/'
 
-LOGIN_URL = ...
-
-LOGOUT_REDIRECT_URL = ...
+LOGIN_URL = reverse_lazy('app:login')
 
