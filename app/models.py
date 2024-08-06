@@ -9,14 +9,17 @@ class BaseModel(models.Model):
         abstract = True
 
 
-class CustomUser(AbstractBaseUser, BaseModel):
-    login = models.CharField(verbose_name='Логин', max_length=30, blank=False, null=False, unique=True)
+class CustomUser(AbstractUser, BaseModel):
+    username = models.CharField(verbose_name='Логин', max_length=128, blank=False, null=False, unique=True)
     password = models.CharField(verbose_name="Пароль", max_length=128)
 
-    # Избыточное поле
+    # Избыточные поля базового класса
     last_login = ...
+    first_name = ...
+    last_name = ...
+    date_joined = ...
 
-    USERNAME_FIELD = "login"
+    USERNAME_FIELD = "username"
 
     class Meta:
         db_table = 'users'
