@@ -1,8 +1,8 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
 from .models import CustomUser
 
-class LoginForm(forms.ModelForm):
+class LoginForm(forms.Form):
     username = forms.CharField(max_length=128, label='Логин')
     password = forms.CharField(
         label="Пароль",
@@ -10,11 +10,8 @@ class LoginForm(forms.ModelForm):
         widget=forms.PasswordInput(attrs={"autocomplete": "new-password"}),
     )
 
-    class Meta:
-        model = CustomUser
-        fields = ('username', 'password')
 
-class CustomUserCreationForm(LoginForm):
+class CustomUserCreationForm(forms.ModelForm):
     username = forms.CharField(max_length=128, label='Логин')
     password = forms.CharField(
         label="Пароль",
