@@ -2,7 +2,9 @@ from django.shortcuts import redirect, render
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import LoginView
+
+from .models import CustomUser, Item
+
 from .forms import CustomUserCreationForm, LoginForm
 
 """Здесь не использую CBV и встроенные представления авторизации django,
@@ -34,4 +36,24 @@ def logout_view(request):
 
 @login_required
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    users = CustomUser.objects.all()
+    items = Item.objects.all()
+
+    context = {
+        'users': users,
+        'items': items
+    }
+
+    return render(request, 'dashboard.html', context=context)
+
+
+def dashboard_users(request):
+    users = CustomUser.objects.all()
+    items = Item.objects.all()
+
+    context = {
+        'users': users,
+        'items': items
+    }
+
+    return render(request, 'users.html', context=context)

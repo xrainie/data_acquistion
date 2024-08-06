@@ -1,3 +1,6 @@
+{% load bootstrap5 %}
+{% bootstrap_css %} 
+{% bootstrap_javascript %}
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -21,6 +24,8 @@
         {% block content %}
 
         {% endblock %}
+
+        {% block mainblock %}{% endblock mainblock %}
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {

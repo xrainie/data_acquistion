@@ -1,0 +1,40 @@
+{% extends "dashboard.html" %}
+{% block title %}
+    Users
+{% endblock %}
+
+
+{% block mainblock %}
+<div class="module">
+    Вы можете добавить новую запись модели User
+    <a href="#" class="btn btn-success">Добавить</a>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Login</th>
+            <th scope="col">Items</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <th scope="row">{{user.id}}</th>
+                <td>{{user.username}}</td>
+                <td>
+                    {% comment %} {% for item in user.items %}
+                        {{item.name}}|
+                    {%empty%}
+                        Нет значений
+                    {% endfor %} {% endcomment %}
+
+                </td>
+                <td>
+                    <a href="#" class="btn btn-secondary">Изменить</a>
+                    <a href="#" class="btn btn-danger">Удалить</a>
+                </td>
+            </tr>
+            {% endfor %}
+</div>
+{% endblock mainblock %}
