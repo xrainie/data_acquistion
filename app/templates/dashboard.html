@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load metaname %}
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+{% with course=module.course %}
+<h1>Dashboard</h1>
+<div class="contents">
+    <h3>Сущности</h3>
+    <ul id="modules">
+        <li class="selected" >
+            <a href="#">
+                Users
+            </a>
+        </li>
+        <li class="selected" >
+            <a href="#">
+                Items
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="module">
+    some text
+</div>
+{% endwith %}
+{% endblock %}

@@ -31,3 +31,7 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return render(request, 'registration/logged_out.html')
+
+@login_required
+def dashboard(request):
+    return render(request, 'dashboard.html')
