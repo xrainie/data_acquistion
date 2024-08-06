@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from django.conf.global_settings import AUTH_USER_MODEL
+from django.conf.global_settings import AUTH_USER_MODEL, LOGIN_URL, LOGOUT_REDIRECT_URL
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -77,3 +77,10 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'app.CustomUser'
+
+STATIC_URL = 'static/'
+
+LOGIN_URL = ...
+
+LOGOUT_REDIRECT_URL = ...
+
