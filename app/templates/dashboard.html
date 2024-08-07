@@ -10,12 +10,12 @@
 <div class="contents">
     <h3>Сущности</h3>
     <ul id="modules">
-        <li class={% if selected %}"selected"{% endif %} >
+        <li class={% if select == 'users' %}"selected"{% endif %} >
             <a href="{% url "app:users" %}">
                 Users | Всего {{ users.count }}
             </a>
         </li>
-        <li class={% if selected %}"selected"{% endif %} >
+        <li class={% if select == 'items' %}"selected"{% endif %} >
             <a href="{% url "app:items" %}">
                 Items | Всего {{ items.count }}
             </a>
@@ -23,6 +23,7 @@
     </ul>
 </div>
 
+<div class="module">{{text}}</div>
 {% endblock %}
 
 {% block mainblock %}

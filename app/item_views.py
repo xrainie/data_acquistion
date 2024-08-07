@@ -4,19 +4,23 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
 
-from .models import CustomUser, Item
+from app.utils import query_or_get_objects_from_cache
+
+from .models import Item
 
 from .forms import ItemCreationForm, ItemEditForm
 
+"""Здесь не использую CBV и встроенные представления авторизации django,
+             иначе было бы показывать нечего:D"""
 
 @login_required
 def dashboard_items(request):
-    users = CustomUser.objects.all()
-    items = Item.objects.all()
+    users, items = query_or_get_objects_from_cache()
 
     context = {
         'users': users,
-        'items': items
+        'items': items,
+        'select': 'items'
     }
 
     return render(request, 'items.html', context=context)
@@ -24,6 +28,7 @@ def dashboard_items(request):
 
 @login_required
 def edit_item_view(request, id: int):
+    users, items = query_or_get_objects_from_cache()
     item = get_object_or_404(Item, id=id)
     if request.method == 'POST':
         form = ItemEditForm(instance=item, data=request.POST)
@@ -31,16 +36,23 @@ def edit_item_view(request, id: int):
             form.save()
         else:
             return render(request, 'manage/edit.html', {'form': form,
-                                                        'object': 'Item'})
+                                                        'object': 'Item',
+                                                        'users': users,
+                                                        'items': items,
+                                                        'select': 'items'})
     if request.method == 'GET':
         form = ItemEditForm(instance=item)
         return render(request, 'manage/edit.html', {'form': form,
-                                                    'object': 'Item'})
+                                                    'object': 'Item',
+                                                    'users': users,
+                                                    'items': items,
+                                                    'select': 'items'})
     return redirect(reverse_lazy('app:items'))
 
 
 @login_required
 def create_item(request):
+    users, items = query_or_get_objects_from_cache()
     message = False
     if request.method == 'POST':
         form = ItemCreationForm(request.POST)
@@ -53,13 +65,19 @@ def create_item(request):
         form = ItemCreationForm()
     return render(request, "manage/create.html", {'form': form,
                                                'message': message,
-                                               'object': 'Item'})
+                                               'object': 'Item',
+                                               'users': users,
+                                               'items': items,
+                                               'select': 'items'})
 
 
 @login_required
 def delete_item(request, id: int):
+    users, items = query_or_get_objects_from_cache()
     if request.method == 'GET':
-        return render(request, 'manage/delete_confirm.html')
+        return render(request, 'manage/delete_confirm.html', {'users': users,
+                                                              'items': items,
+                                                              'select': 'items'})
     if request.method == 'POST':
         item = get_object_or_404(Item, id=id)
         item.delete()

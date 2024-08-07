@@ -42,7 +42,8 @@ def dashboard(request):
 
     context = {
         'users': users,
-        'items': items
+        'items': items,
+        'text': 'Добро пожаловать. Тестовое задание для Data Acquisition.'
     }
 
     return render(request, 'dashboard.html', context=context)

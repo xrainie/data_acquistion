@@ -85,3 +85,14 @@ STATIC_URL = 'static/'
 
 LOGIN_URL = reverse_lazy('app:login')
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/1',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient'
+        }
+    }
+}
+
+STATIC_ROOT = BASE_DIR / 'static'
