@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, AbstractUser
+from django.urls import reverse
 
 class BaseModel(models.Model):
     created_at = models.DateTimeField(verbose_name='Время создания', auto_now_add=True)
@@ -26,6 +27,9 @@ class CustomUser(AbstractUser, BaseModel):
 
     def __str__(self):
         return self.login
+    
+    def get_absolute_url(self):
+        return reverse("app:edit_user", kwargs={"pk": self.pk})
     
 
 class Item(BaseModel):

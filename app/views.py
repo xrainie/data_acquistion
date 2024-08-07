@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404
 
 from .models import CustomUser, Item
 
-from .forms import CustomUserCreationForm, LoginForm
+from .forms import CustomUserCreationForm, LoginForm, UserEditForm
 
 """Здесь не использую CBV и встроенные представления авторизации django,
              иначе было бы показывать нечего:D"""
@@ -60,7 +60,7 @@ def dashboard_users(request):
 
     return render(request, 'users.html', context=context)
 
-
+@login_required
 def create_user(request):
     message = False
     if request.method == 'POST':
@@ -82,3 +82,17 @@ def delete_user(request, id: int):
         user = get_object_or_404(CustomUser, id=id)
         user.delete()
         return redirect(reverse_lazy('app:users'))
+    
+@login_required
+def edit_user_view(request, id: int):
+    user = get_object_or_404(CustomUser, id=id)
+    if request.method == 'POST':
+        form = UserEditForm(instance=user, data=request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            return render(request, 'edituser.html', {'form': form})
+    if request.method == 'GET':
+        form = UserEditForm(instance=user)
+        return render(request, 'edituser.html', {'form': form})
+    return redirect(reverse_lazy('app:users'))

@@ -10,12 +10,12 @@
 <div class="contents">
     <h3>Сущности</h3>
     <ul id="modules">
-        <li class="selected" >
-            <a href="#">
+        <li class={% if selected %}"selected"{% endif %} >
+            <a href="{% url "app:users" %}">
                 Users | Всего {{ users.count }}
             </a>
         </li>
-        <li class="selected" >
+        <li class={% if selected %}"selected"{% endif %} >
             <a href="#">
                 Items | Всего {{ items.count }}
             </a>

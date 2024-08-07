@@ -31,7 +31,7 @@
 
                 </td>
                 <td>
-                    <a href="#" class="btn btn-secondary">Изменить</a>
+                    <a href="{% url "app:edit_user" user.id%}" class="btn btn-secondary">Изменить</a>
                     <a href="{% url "app:delete_user" user.id %}" class="btn btn-danger">Удалить</a>
                 </td>
             </tr>
