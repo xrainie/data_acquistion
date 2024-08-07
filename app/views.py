@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
 
 from .models import CustomUser, Item
 
@@ -46,7 +47,7 @@ def dashboard(request):
 
     return render(request, 'dashboard.html', context=context)
 
-
+@login_required
 def dashboard_users(request):
     users = CustomUser.objects.all()
     items = Item.objects.all()
@@ -57,3 +58,16 @@ def dashboard_users(request):
     }
 
     return render(request, 'users.html', context=context)
+
+
+def create_user(request):
+    message = False
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            message = True
+    if request.method == 'GET':
+        form = CustomUserCreationForm()
+    return render(request, "createuser.html", {'form': form,
+                                               'message': message})

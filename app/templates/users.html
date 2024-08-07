@@ -7,7 +7,7 @@
 {% block mainblock %}
 <div class="module">
     Вы можете добавить новую запись модели User
-    <a href="#" class="btn btn-success">Добавить</a>
+    <a href="{% url "app:create_user" %}" class="btn btn-success">Добавить</a>
     <table class="table">
         <thead>
           <tr>

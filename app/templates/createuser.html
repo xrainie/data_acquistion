@@ -1,0 +1,28 @@
+{% extends "dashboard.html" %}
+{% block title %}
+    Users
+{% endblock %}
+
+
+{% block mainblock %}
+<div class="module">
+{% if message %}
+    <p class='text-success'>Пользователь успешно добавлен!</p>
+{% endif %}
+{% if errors %}
+    <p>Вы ввели неверный логин или пароль. Пожалуйста, попробуйте снова.</p>
+{% elif form.errors %}
+    {{form.errors}}
+{% else %}
+    <p>Введите данные для создания сущности <strong>User</strong>:</p>
+{% endif %}
+<div class="login-form">
+    <form action="{% url 'app:create_user' %}" method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}" />
+        <p><input type="submit" value="Создать"></p>
+    </form>
+</div>
+</div>
+{% endblock mainblock %}

@@ -5,6 +5,8 @@
     <div class="module">
     {% if errors %}
         <p>Вы ввели неверный логин или пароль. Пожалуйста, попробуйте снова.</p>
+    {% elif form.errors %}
+        {{form.errors}}
     {% else %}
         <p>Введите данные для входа:</p>
     {% endif %}
