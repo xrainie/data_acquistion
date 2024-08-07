@@ -70,14 +70,14 @@ def create_user(request):
             message = True
     if request.method == 'GET':
         form = CustomUserCreationForm()
-    return render(request, "createuser.html", {'form': form,
-                                               'message': message})
+    return render(request, "manage/create.html", {'form': form,
+                                               'message': message,
+                                               'object': 'User'})
 
 @login_required
 def delete_user(request, id: int):
-    user = get_object_or_404(CustomUser, id=id)
     if request.method == 'GET':
-        return render(request, 'delete_confirm.html', {'user': user})
+        return render(request, 'manage/delete_confirm.html')
     if request.method == 'POST':
         user = get_object_or_404(CustomUser, id=id)
         user.delete()
@@ -91,10 +91,12 @@ def edit_user_view(request, id: int):
         if form.is_valid():
             form.save()
         else:
-            return render(request, 'edituser.html', {'form': form})
+            return render(request, 'manage/edit.html', {'form': form,
+                                                        'object': 'User'})
     if request.method == 'GET':
         form = UserEditForm(instance=user)
-        return render(request, 'edituser.html', {'form': form})
+        return render(request, 'manage/edit.html', {'form': form,
+                                                    'object': 'User'})
     return redirect(reverse_lazy('app:users'))
 
 
@@ -119,10 +121,12 @@ def edit_item_view(request, id: int):
         if form.is_valid():
             form.save()
         else:
-            return render(request, 'edititem.html', {'form': form})
+            return render(request, 'manage/edit.html', {'form': form,
+                                                        'object': 'Item'})
     if request.method == 'GET':
         form = ItemEditForm(instance=item)
-        return render(request, 'edititem.html', {'form': form})
+        return render(request, 'manage/edit.html', {'form': form,
+                                                    'object': 'Item'})
     return redirect(reverse_lazy('app:items'))
 
 
@@ -138,14 +142,15 @@ def create_item(request):
             message = True
     if request.method == 'GET':
         form = ItemCreationForm()
-    return render(request, "createitem.html", {'form': form,
-                                               'message': message})
+    return render(request, "manage/create.html", {'form': form,
+                                               'message': message,
+                                               'object': 'Item'})
 
 
 @login_required
 def delete_item(request, id: int):
     if request.method == 'GET':
-        return render(request, 'delete_confirm.html')
+        return render(request, 'manage/delete_confirm.html')
     if request.method == 'POST':
         item = get_object_or_404(Item, id=id)
         item.delete()

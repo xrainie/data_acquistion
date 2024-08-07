@@ -1,20 +1,20 @@
 {% extends "dashboard.html" %}
 {% block title %}
-    Users
+    Create {{object}}
 {% endblock %}
 
 
 {% block mainblock %}
 <div class="module">
 {% if message %}
-    <p class='text-success'>Item успешно добавлен!</p>
+    <p class='text-success'>{{object}} успешно добавлен!</p>
 {% endif %}
 {% if errors %}
-    <p>Вы ввели неверные данные. Пожалуйста, попробуйте снова.</p>
+    <p>Вы ввели неверне данные. Пожалуйста, попробуйте снова.</p>
 {% elif form.errors %}
     {{form.errors}}
 {% else %}
-    <p>Введите данные для создания сущности <strong>Item</strong>:</p>
+    <p>Введите данные для создания сущности <strong>{{object}}</strong>:</p>
 {% endif %}
 <div class="login-form">
     <form action="" method="post">
