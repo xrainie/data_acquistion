@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
 
-from app.utils import query_or_get_objects_from_cache
+from app.utils import query, query_or_get_objects_from_cache
 
 from .models import Item
 
@@ -15,7 +15,7 @@ from .forms import ItemCreationForm, ItemEditForm
 
 @login_required
 def dashboard_items(request):
-    users, items = query_or_get_objects_from_cache()
+    users, items = query()
 
     context = {
         'users': users,

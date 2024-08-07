@@ -13,3 +13,8 @@ def query_or_get_objects_from_cache() -> list[QuerySet]:
         items = Item.objects.all()
         cache.set('items', items)
     return [users, items]
+
+def query() -> list[QuerySet]:
+    users = CustomUser.objects.all()
+    items = Item.objects.all()
+    return [users, items]
