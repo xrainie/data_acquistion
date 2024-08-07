@@ -23,11 +23,17 @@
                 <th scope="row">{{user.id}}</th>
                 <td>{{user.username}}</td>
                 <td>
-                    {% comment %} {% for item in user.items %}
-                        {{item.name}}|
+                    {% for item in items %}
+                        {% if item.user == user %}
+                            {% if forloop.last %}
+                                {{item.name}}
+                            {% else %}
+                                {{item.name}},
+                            {% endif %}
+                        {% endif %}
                     {%empty%}
                         Нет значений
-                    {% endfor %} {% endcomment %}
+                    {% endfor %}
 
                 </td>
                 <td>

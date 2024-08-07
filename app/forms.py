@@ -1,6 +1,8 @@
+from pyexpat import model
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
-from .models import CustomUser
+from django.forms import fields
+from .models import CustomUser, Item
 
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=128, label='Логин')
@@ -41,3 +43,17 @@ class UserEditForm(forms.ModelForm):
     class Meta:
         model = CustomUser
         fields = ['username', ]
+
+
+class ItemEditForm(forms.ModelForm):
+
+    class Meta:
+        model = Item
+        fields = ('name',)
+
+
+class ItemCreationForm(forms.ModelForm):
+    
+    class Meta:
+        model = Item
+        fields = ('name', )

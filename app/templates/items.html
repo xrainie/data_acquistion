@@ -1,0 +1,40 @@
+{% extends "dashboard.html" %}
+{% block title %}
+    Items
+{% endblock %}
+
+
+{% block mainblock %}
+<div class="module">
+    Добавить новую запись модели Items
+    <a href="{% url "app:create_item" %}" class="btn btn-success">Добавить</a>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Name</th>
+            <th scope="col">User</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <th scope="row">{{item.id}}</th>
+                <td>{{item.name}}</td>
+                <td>
+                    {% if item.user %}
+                        {{item.user.username}}
+                    {% else %}
+                        Нет значений
+                    {% endif %}
+
+                </td>
+                <td>
+                    <a href="{% url "app:edit_item" item.id%}" class="btn btn-secondary">Изменить</a>
+                    <a href="{% url "app:delete_item" item.id %}" class="btn btn-danger">Удалить</a>
+                </td>
+            </tr>
+            {% endfor %}
+</div>
+{% endblock mainblock %}

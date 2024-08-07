@@ -34,7 +34,7 @@ class CustomUser(AbstractUser, BaseModel):
 
 class Item(BaseModel):
     name = models.CharField(max_length=255, null=False, blank=False, verbose_name='Название')
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='items', verbose_name='Пользователь')
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='items', verbose_name='Пользователь', blank=True)
 
     def __str__(self):
         return f'User {self.user.login} item named {self.name}'

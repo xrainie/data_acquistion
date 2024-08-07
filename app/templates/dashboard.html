@@ -16,7 +16,7 @@
             </a>
         </li>
         <li class={% if selected %}"selected"{% endif %} >
-            <a href="#">
+            <a href="{% url "app:items" %}">
                 Items | Всего {{ items.count }}
             </a>
         </li>
