@@ -10,6 +10,13 @@
     <a href="{% url "app:create_user" %}" class="btn btn-success">Добавить</a>
     <table class="table">
         <thead>
+            <tr>
+              <th scope="col">Скрыть?</th>
+              <th scope="col"><input class="form-check-input" onclick="toggleColumn('col1')" type="checkbox" value="" id="flexCheckDefault"></button></th>
+              <th scope="col"><input class="form-check-input" onclick="toggleColumn('col2')" type="checkbox" value="" id="flexCheckDefault"></button></th>
+            </tr>
+          </thead>
+        <thead>
           <tr>
             <th scope="col">id</th>
             <th scope="col">Login</th>
@@ -20,10 +27,11 @@
         <tbody>
             {% for user in users %}
             <tr>
-                <th scope="row">{{user.id}}</th>
-                <td>{{user.username}}</td>
-                <td>
-                    {% for item in items %}
+                <th scope="row" class='fit'>{{user.id}}</th>
+                <td class='fit'><p class='col1 fit'>{{user.username}}</p></td>
+                <td class=' fit'> 
+                    <p class='fit col2'>
+                        {% for item in items %}
                         {% if item.user == user %}
                             {% if forloop.last %}
                                 {{item.name}}
@@ -34,13 +42,22 @@
                     {%empty%}
                         Нет значений
                     {% endfor %}
-
+                    </p>
                 </td>
-                <td>
-                    <a href="{% url "app:edit_user" user.id%}" class="btn btn-secondary">Изменить</a>
-                    <a href="{% url "app:delete_user" user.id %}" class="btn btn-danger">Удалить</a>
+                <td class='fit'>
+                    <p class='fit'>
+                        <a href="{% url "app:edit_user" user.id%}" class="btn btn-secondary">Изменить</a>
+                        <a href="{% url "app:delete_user" user.id %}" class="btn btn-danger">Удалить</a>
+                    </p>
                 </td>
             </tr>
             {% endfor %}
 </div>
+
+<style>
+    td.fit, th.fit {
+        width: 25%; /* Минимальные размеры */
+        white-space: nowrap; /* Отсутствие переноса текста */
+      }
+</style>
 {% endblock mainblock %}
