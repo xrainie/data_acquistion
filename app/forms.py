@@ -1,7 +1,6 @@
 from pyexpat import model
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
-from django.forms import fields
+from django.contrib.auth.forms import UserCreationForm
 from .models import CustomUser, Item
 
 class LoginForm(forms.Form):
