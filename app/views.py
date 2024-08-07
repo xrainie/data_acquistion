@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404
 
 from .models import CustomUser, Item
 
@@ -25,8 +26,8 @@ def login_view(request):
                 return redirect('/')
             return render(request, "registration/login.html", context={"form": form, "errors": 'Вы ввели неверный логин или пароль.'})
     if request.method == "GET":
-        # if request.user.is_authenticated:
-        #     return redirect('/')
+        if request.user.is_authenticated:
+            return redirect(reverse_lazy('app:dashboard'))
         form = LoginForm()
     return render(request, "registration/login.html", context={"form": form})
 
@@ -71,3 +72,13 @@ def create_user(request):
         form = CustomUserCreationForm()
     return render(request, "createuser.html", {'form': form,
                                                'message': message})
+
+@login_required
+def delete_user(request, id: int):
+    user = get_object_or_404(CustomUser, id=id)
+    if request.method == 'GET':
+        return render(request, 'delete_confirm.html', {'user': user})
+    if request.method == 'POST':
+        user = get_object_or_404(CustomUser, id=id)
+        user.delete()
+        return redirect(reverse_lazy('app:users'))
