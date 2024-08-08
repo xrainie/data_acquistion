@@ -43,7 +43,7 @@ def dashboard(request):
     context = {
         'users': users,
         'items': items,
-        'text': 'Добро пожаловать. Тестовое задание для Data Acquisition. Здесь можно добавить графики(dashboards).'
+        'text': 'Добро пожаловать. Здесь можно добавить графики(dashboards).'
     }
 
     return render(request, 'dashboard.html', context=context)
