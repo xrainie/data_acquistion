@@ -1,4 +1,4 @@
-.env environments:
+.env variables:
 DJANGO_SETTINGS_MODULE=admin_panel.settings.prod
 SECRET_KEY=your_secret_key
 POSTRES_DB=postgres
